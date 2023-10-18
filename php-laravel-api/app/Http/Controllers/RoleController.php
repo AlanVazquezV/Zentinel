@@ -87,7 +87,10 @@ class RoleController extends Controller
 		$arr_id = explode(",", $rec_id);
 		$query = Role::query();
 		$query->whereIn("id", $arr_id);
-		$query->delete();
+		//to raise audit trail delete event, use Eloquent find before delete
+		$query->get()->each(function ($record, $key) {
+			$record->delete();
+		});
 		return $this->respond($arr_id);
 	}
 }

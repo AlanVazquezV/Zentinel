@@ -1,8 +1,10 @@
 <?php 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-class Employees extends Model 
+use OwenIt\Auditing\Contracts\Auditable;
+class Employees extends Model implements Auditable
 {
+	use \OwenIt\Auditing\Auditable;
 	
 
 	/**
@@ -182,4 +184,12 @@ class Employees extends Model
      * @var bool
      */
 	public $timestamps = false;
+	
+
+	/**
+     * Audit log events
+     * 
+     * @var array
+     */
+	protected $auditEvents = ['created', 'updated', 'deleted'];
 }

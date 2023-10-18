@@ -174,6 +174,14 @@ export const AppMenus = {
         
       }
     ]
+  },
+  {
+    "to": "/audits",
+    "label": "Audits",
+    "icon": "pi pi-th-large text-primary",
+    "iconcolor": "",
+    "target": "",
+    
   }
 ],
 

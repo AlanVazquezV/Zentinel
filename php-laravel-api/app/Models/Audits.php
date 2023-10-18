@@ -1,10 +1,8 @@
 <?php 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
-class IncidentsStatus extends Model implements Auditable
+class Audits extends Model 
 {
-	use \OwenIt\Auditing\Auditable;
 	
 
 	/**
@@ -12,7 +10,7 @@ class IncidentsStatus extends Model implements Auditable
      *
      * @var string
      */
-	protected $table = 'incidents_status';
+	protected $table = 'audits';
 	
 
 	/**
@@ -28,7 +26,7 @@ class IncidentsStatus extends Model implements Auditable
      *
      * @var array
      */
-	protected $fillable = ["label"];
+	protected $fillable = [];
 	
 
 	/**
@@ -40,10 +38,18 @@ class IncidentsStatus extends Model implements Auditable
 		//search table record 
 		$search_condition = '(
 				id LIKE ?  OR 
-				label LIKE ? 
+				user_type LIKE ?  OR 
+				event LIKE ?  OR 
+				auditable_type LIKE ?  OR 
+				old_values LIKE ?  OR 
+				new_values LIKE ?  OR 
+				url LIKE ?  OR 
+				ip_address LIKE ?  OR 
+				user_agent LIKE ?  OR 
+				tags LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%"
+			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -58,7 +64,19 @@ class IncidentsStatus extends Model implements Auditable
 	public static function listFields(){
 		return [ 
 			"id", 
-			"label" 
+			"user_type", 
+			"user_id", 
+			"event", 
+			"auditable_type", 
+			"auditable_id", 
+			"old_values", 
+			"new_values", 
+			"url", 
+			"ip_address", 
+			"user_agent", 
+			"tags", 
+			"created_at", 
+			"updated_at" 
 		];
 	}
 	
@@ -71,7 +89,19 @@ class IncidentsStatus extends Model implements Auditable
 	public static function exportListFields(){
 		return [ 
 			"id", 
-			"label" 
+			"user_type", 
+			"user_id", 
+			"event", 
+			"auditable_type", 
+			"auditable_id", 
+			"old_values", 
+			"new_values", 
+			"url", 
+			"ip_address", 
+			"user_agent", 
+			"tags", 
+			"created_at", 
+			"updated_at" 
 		];
 	}
 	
@@ -84,7 +114,19 @@ class IncidentsStatus extends Model implements Auditable
 	public static function viewFields(){
 		return [ 
 			"id", 
-			"label" 
+			"user_type", 
+			"user_id", 
+			"event", 
+			"auditable_type", 
+			"auditable_id", 
+			"old_values", 
+			"new_values", 
+			"url", 
+			"ip_address", 
+			"user_agent", 
+			"tags", 
+			"created_at", 
+			"updated_at" 
 		];
 	}
 	
@@ -97,20 +139,19 @@ class IncidentsStatus extends Model implements Auditable
 	public static function exportViewFields(){
 		return [ 
 			"id", 
-			"label" 
-		];
-	}
-	
-
-	/**
-     * return edit page fields of the model.
-     * 
-     * @return array
-     */
-	public static function editFields(){
-		return [ 
-			"id", 
-			"label" 
+			"user_type", 
+			"user_id", 
+			"event", 
+			"auditable_type", 
+			"auditable_id", 
+			"old_values", 
+			"new_values", 
+			"url", 
+			"ip_address", 
+			"user_agent", 
+			"tags", 
+			"created_at", 
+			"updated_at" 
 		];
 	}
 	
@@ -121,12 +162,4 @@ class IncidentsStatus extends Model implements Auditable
      * @var bool
      */
 	public $timestamps = false;
-	
-
-	/**
-     * Audit log events
-     * 
-     * @var array
-     */
-	protected $auditEvents = ['created', 'updated', 'deleted'];
 }

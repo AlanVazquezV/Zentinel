@@ -59,7 +59,7 @@ class UsersController extends Controller
 		
 		//save Users record
 		$record = Users::create($modeldata);
-		$record->assignRole("Admin"); //set default role for user
+		$record->assignRole("User"); //set default role for user
 		$rec_id = $record->id;
 		return $this->respond($record);
 	}
@@ -92,7 +92,10 @@ class UsersController extends Controller
 		$arr_id = explode(",", $rec_id);
 		$query = Users::query();
 		$query->whereIn("id", $arr_id);
-		$query->delete();
+		//to raise audit trail delete event, use Eloquent find before delete
+		$query->get()->each(function ($record, $key) {
+			$record->delete();
+		});
 		return $this->respond($arr_id);
 	}
 }

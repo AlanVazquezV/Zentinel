@@ -36,6 +36,12 @@ Route::middleware(['auth:api', 'rbac'])->group(function () {
 	Route::any('attendancestatus/edit/{rec_id}', 'AttendanceStatusController@edit');	
 	Route::any('attendancestatus/delete/{rec_id}', 'AttendanceStatusController@delete');
 
+/* routes for Audits Controller  */	
+	Route::get('audits', 'AuditsController@index');
+	Route::get('audits/index', 'AuditsController@index');
+	Route::get('audits/index/{filter?}/{filtervalue?}', 'AuditsController@index');	
+	Route::get('audits/view/{rec_id}', 'AuditsController@view');
+
 /* routes for Biometrics Controller  */	
 	Route::get('biometrics', 'BiometricsController@index');
 	Route::get('biometrics/index', 'BiometricsController@index');

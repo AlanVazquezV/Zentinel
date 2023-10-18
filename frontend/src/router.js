@@ -77,6 +77,22 @@ let routes = [
 			},
 		
 
+//audits routes
+			{
+				path: '/audits/:fieldName?/:fieldValue?',
+				name: 'auditslist',
+				component: () => import('./pages/audits/list.vue'), 
+				props: route => passRouteToProps(route)
+			},
+	
+			{ 
+				path: '/audits/view/:id', 
+				name: 'auditsview', 
+				component: () => import('./pages/audits/view.vue'), 
+				props: true
+			},
+		
+
 //biometrics routes
 			{
 				path: '/biometrics/:fieldName?/:fieldValue?',
