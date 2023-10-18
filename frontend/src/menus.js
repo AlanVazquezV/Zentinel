@@ -172,16 +172,16 @@ export const AppMenus = {
         "iconcolor": "",
         "target": "",
         
+      },
+      {
+        "to": "/audits",
+        "label": "Audits",
+        "icon": "pi pi-check",
+        "iconcolor": "",
+        "target": "",
+        
       }
     ]
-  },
-  {
-    "to": "/audits",
-    "label": "Audits",
-    "icon": "pi pi-th-large text-primary",
-    "iconcolor": "",
-    "target": "",
-    
   }
 ],
 
